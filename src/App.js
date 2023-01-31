@@ -8,7 +8,7 @@ const images = [
   "https://img.freepik.com/free-photo/beautiful-scenery-of-a-pathway-in-a-forest-with-trees-covered-with-frost_181624-42376.jpg?w=1380&t=st=1675158504~exp=1675159104~hmac=b7d87092713179c85dd767b912721476022817898ebfee88cb64b244df8d7396",
 ];
 
-function App() {
+function Slider() {
   const [current, setCurrent] = useState(0);
 
   function nextSlide() {
@@ -21,7 +21,7 @@ function App() {
 
   return (
     <div>
-      <h2>Project 1: Carousel</h2>
+      <h1>Project 1: Image slider</h1>
       <div className="slider">
         <div className="left-arrow" onClick={prevSlide}>
           ⬅
@@ -29,17 +29,22 @@ function App() {
         <div className="right-arrow" onClick={nextSlide}>
           ⮕
         </div>
+
         {images.map(
-          (image, index) =>
-            current === index && (
-              <div key={image} className="slide">
-                <img src={image} alt="images" />
+          (img, i) =>
+            current === i && (
+              <div key={img} className="slide">
+                <img src={img} alt="images" />
               </div>
             )
         )}
       </div>
     </div>
   );
+}
+
+function App() {
+  return <Slider />;
 }
 
 export default App;
