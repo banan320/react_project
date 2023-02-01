@@ -21,7 +21,7 @@ function Slider() {
 
   return (
     <div>
-      <h1>Project 1: Image slider</h1>
+      <h1>Image slider</h1>
       <div className="slider">
         <div className="left-arrow" onClick={prevSlide}>
           ⬅
