@@ -9,7 +9,7 @@ function Question({ question }) {
         <h4>{question.title}</h4>
         <button onClick={() => setOpen(!isOpen)}>{isOpen ? "-" : "+"}</button>
       </div>
-      {isOpen && <p>{question.info}</p>}
+      {isOpen && <p>{question.body}</p>}
     </section>
   );
 }

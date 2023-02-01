@@ -3,7 +3,7 @@ html {
 }
 
 .container {
-  background-color: rgb(10, 27, 184);
+  background-color: #f492239f;
   max-width: 600px;
   padding: 10px 20px 20px;
   border-radius: 12px;
@@ -18,20 +18,20 @@ h1 {
   margin: 0 auto;
   text-align: center;
   padding: 10px 0 20px 0;
-  color: white;
+  color: #ffffff;
 }
 
 button {
-  background: rgb(211, 216, 253);
-  color: rgb(10, 27, 184);
-  border: 2px solid rgb(10, 27, 184);
+  background: #e4ceb587;
+  color: #de8b2d;
+  border: 2px solid #de8b2d;
   border-radius: 5px;
   font-size: 20px;
 }
 
 section div,
 section p {
-  background-color: white;
+  background-color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: space-between;
