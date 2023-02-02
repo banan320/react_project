@@ -3,7 +3,7 @@ html {
 }
 
 .container {
-  background-color: #f492239f;
+  background-color: #fdc08b;
   max-width: 600px;
   padding: 10px 20px 20px;
   border-radius: 12px;
@@ -22,7 +22,7 @@ h1 {
 }
 
 button {
-  background: #e4ceb587;
+  background: #fdc08b47;
   color: #de8b2d;
   border: 2px solid #de8b2d;
   border-radius: 5px;
