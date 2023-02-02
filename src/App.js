@@ -1,46 +1,62 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./App.css";
 
-function getRandomQuote(quotes) {
-  return quotes[Math.floor(Math.random() * quotes.length)];
+function Item({ item, onRemoveItem }) {
+  return (
+    <li>
+      {item}
+      <button className="delete" onClick={() => onRemoveItem(item)}>
+        x
+      </button>
+    </li>
+  );
 }
 
-function Quote() {
-  const [quotes, setQuotes] = useState([]);
-  const [quote, setQuote] = useState(null);
+function AddList() {
+  const [items, setItems] = useState([]);
 
-  useEffect(() => {
-    fetch("https://type.fit/api/quotes")
-      .then((res) => res.json())
-      .then((json) => {
-        setQuotes(json);
-        setQuote(json[0]);
-      });
-  }, []);
+  function onRemoveItem(itemToRemove) {
+    const newItems = items.filter((item) => item !== itemToRemove);
+    setItems(newItems);
+  }
 
-  function getNewQuote() {
-    setQuote(getRandomQuote(quotes));
+  function onSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
+    const input = form.item;
+    const newItems = [...items, input.value];
+    setItems(newItems);
+    form.reset();
   }
 
   return (
-    <main>
-      <h1>Quote Generator</h1>
-      <section>
-        <button onClick={getNewQuote}>New Quote</button>
-        <h3>
-          <span>“</span>
-          {quote?.text}
-        </h3>
-        <i>- {quote?.author}</i>
-      </section>
-    </main>
+    <div>
+      <h1>Shopping List</h1>
+      <div className="shopping-list">
+        <h2>Items To Buy</h2>
+        <form onSubmit={onSubmit}>
+          <input
+            type="text"
+            name="item"
+            placeholder="Add a new item"
+            required
+          />
+          <button>Add</button>
+        </form>
+        <ul>
+          {items.map((item, index) => (
+            <Item onRemoveItem={onRemoveItem} key={item + index} item={item} />
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 }
 
 function App() {
   return (
     <div>
-      <Quote />
+      <AddList />
     </div>
   );
 }
