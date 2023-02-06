@@ -1,59 +1,52 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import "./App.css";
 
-function Menu({ onSelectVideo, videoValues }) {
-  return (
-    <form onClick={(event) => onSelectVideo(event.target.value)}>
-      {videoValues.map((value, i) => (
-        <div className="video-inputs">
-          <input key={i} type="radio" name="src" value={value} />
-          {value}
-        </div>
-      ))}
-    </form>
-  );
-}
-
-function Video({ videoSrc }) {
-  return (
-    <div>
-      <video
-        loop
-        controls
-        autostart="true"
-        autoPlay
-        muted
-        src={videoSrc}
-      ></video>
-    </div>
-  );
-}
-
-const videos = {
-  deer: "https://s3.amazonaws.com/codecademy-content/courses/React/react_video-fast.mp4",
-  snail:
-    "https://s3.amazonaws.com/codecademy-content/courses/React/react_video-slow.mp4",
-  cat: "https://s3.amazonaws.com/codecademy-content/courses/React/react_video-cute.mp4",
-  spider:
-    "https://s3.amazonaws.com/codecademy-content/courses/React/react_video-eek.mp4",
-};
-
-const videoNames = Object.keys(videos);
+const defGrowth = 150;
+const defWeight = 50;
 
 function App() {
-  const [videoSrc, setVideoSrc] = useState(videos.deer);
+  const [growth, setGrowth] = useState(defGrowth);
+  const [weight, setWeight] = useState(defWeight);
 
-  function onSelectVideo(video) {
-    const videoSrc = videos[video];
-    setVideoSrc(videoSrc);
+  function onGrowthChange(event) {
+    const inputGrowth = event.target.value;
+    setGrowth(inputGrowth);
   }
 
+  function onWeightChange(event) {
+    const inputWeight = event.target.value;
+    setWeight(inputWeight);
+  }
+
+  const output = useMemo(() => {
+    const calculatedGrowth = growth / 100;
+    return (weight / (calculatedGrowth * calculatedGrowth)).toFixed(1);
+  }, [weight, growth]);
+
   return (
-    <div>
-      <h1>Video Player</h1>
-      <Menu onSelectVideo={onSelectVideo} videoValues={videoNames} />
-      <Video videoSrc={videoSrc} />
-    </div>
+    <main>
+      <h1>BMI CALCULATOR</h1>
+      <div className="input-section">
+        <p className="slider-output">Weight: {weight} kg</p>
+        <input
+          className="input-slider"
+          type="text"
+          placeholder="50"
+          onChange={onWeightChange}
+        />
+        <p className="slider-output">Growth: {growth} cm</p>
+        <input
+          className="input-slider"
+          type="text"
+          placeholder="150"
+          onChange={onGrowthChange}
+        />
+      </div>
+      <div className="output-section">
+        <p>Your BMI is</p>
+        <p className="output">{output}</p>
+      </div>
+    </main>
   );
 }
 
